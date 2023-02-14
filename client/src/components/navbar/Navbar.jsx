@@ -8,11 +8,7 @@ function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const { colorMode, toggleColorMode } = useColorMode();
-  const [dark, setDark] = useState("false");
 
-  useEffect(() => {
-    toggleColorMode();
-  }, [dark]);
 
   return (
     <Flex
@@ -29,9 +25,7 @@ function Navbar() {
 
       <Box>
         <Switch
-          onChange={(e) => {
-            setDark(!dark)
-          }}
+          onChange={toggleColorMode}
           size={"md"}
         />
       </Box>
