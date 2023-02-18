@@ -52,7 +52,7 @@ io.on("connection", (socket) => {
         delete rooms[room][socket.id];
         io.to(room).emit("players", Object.values(rooms[room]));
         console.log("Player left game:", Object.keys(rooms[room]), Object.keys(rooms[room]).length );
-        if (Object.keys(rooms[room]).length === 0) {
+        if (Object.keys(rooms[room]).length === 0 || socket.host === true ) {
           console.log('deleting room')
           delete rooms[room];
         }
