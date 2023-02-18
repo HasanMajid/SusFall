@@ -28,6 +28,7 @@ io.on("connection", (socket) => {
   socket.on("join_room", async (data) => {
     console.log(socket.id);
     if (rooms[data.room]) {
+      socket.roomID = data.room;
       rooms[data.room][socket.id] = { name: data.name, score: 0 };
       await socket.join(data.room);
       io.to(data.room).emit("players", Object.values(rooms[data.room]));
@@ -41,19 +42,21 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    for (const room in rooms) {
-      if (socket.id in rooms[room]) {
-        delete rooms[room][socket.id];
-        io.to(room).emit("players", Object.values(rooms[room]));
-        if (Object.keys(rooms[room]).length === 0 || socket.host === true ) {
-          console.log('deleting room')
-          delete rooms[room];
-          console.log(rooms)
-          io.to(room).emit("error_message", "Host had abandoned game");
-        }
-        break;
+    if (socket.roomID && rooms[socket.roomID] && socket.id in rooms[socket.roomID]) {
+      delete rooms[socket.roomID][socket.id];
+      io.to(socket.roomID).emit("players", Object.values(rooms[socket.roomID]));
+      if (
+        Object.keys(rooms[socket.roomID]).length === 0 ||
+        socket.host === true
+      ) {
+        console.log("deleting room");
+        delete rooms[socket.roomID];
+        console.log(rooms);
+        io.to(socket.roomID).emit("error_message", "Host had abandoned game");
       }
     }
+    socket.host = false;
+    socket.roomID = null;
   });
 });
 
