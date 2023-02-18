@@ -37,6 +37,7 @@ function Navbar() {
         _hover={{ opacity: 0.85, cursor: "pointer" }}
         onClick={() => {
           navigate("/");
+          window.location.reload(false);
         }}
       >
         Home
@@ -63,6 +64,22 @@ function Navbar() {
       >
         Messages
       </Box>
+      {/* <Box
+        ml={5}
+        mr={7}
+        fontWeight={location.pathname === "/game" && "bold"}
+        _hover={{ opacity: 0.85, cursor: "pointer" }}
+        onClick={() => {
+          navigate("/game/234",{
+            state:{
+              id:123,
+              room:'secret'
+            }
+          });
+        }}
+      >
+        Game
+      </Box> */}
     </Flex>
   );
 }
