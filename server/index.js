@@ -19,11 +19,6 @@ const rooms = {};
 
 io.on("connection", (socket) => {
   socket.on("create_room", async (room) => {
-    // if (socket.host) {
-    //   console.log("deleting roomID:", socket.roomID);
-    //   io.socketsLeave(socket.roomID);
-    //   delete rooms[socket.roomID];
-    // }
     socket.host = true;
     socket.roomID = room;
     console.log("created game, host:", socket.host);
@@ -39,7 +34,6 @@ io.on("connection", (socket) => {
     } else {
       socket.emit("error_message", "Room Does not Exist");
     }
-    console.log("Joined game, host:", rooms[data.room]);
   });
 
   socket.on("send_message", (data) => {
@@ -51,11 +45,11 @@ io.on("connection", (socket) => {
       if (socket.id in rooms[room]) {
         delete rooms[room][socket.id];
         io.to(room).emit("players", Object.values(rooms[room]));
-        console.log("Player left game:", Object.keys(rooms[room]), Object.keys(rooms[room]).length );
         if (Object.keys(rooms[room]).length === 0 || socket.host === true ) {
           console.log('deleting room')
           delete rooms[room];
-          io.to(room).emit("error_message", "Room Does not Exist");
+          console.log(rooms)
+          io.to(room).emit("error_message", "Host had abandoned game");
         }
         break;
       }
