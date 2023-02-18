@@ -1,32 +1,34 @@
 import { useState, useEffect } from "react";
 import io from "socket.io-client";
-const socket = io.connect("http://localhost:3000");
+// const socket = io.connect("http://localhost:3000");
 
 function Messages() {
   const [message, setMessage] = useState("");
   const [convo, setConvo] = useState([]);
 
-  const sendMessage = () => {
-    socket.emit("send_message", { message: message });
-  };
+  // const sendMessage = () => {
+  //   socket.emit("send_message", { message: message });
+  // };
 
-  useEffect(() => {
-    console.log('socket changed')
-    socket.on("receive_message", (data) => {
-      // console.log("convo:",convo)
-      setConvo(prevList =>{return [...prevList, data.message]});
-      // setConvo([...convo, data.message]);
-      console.log(data.message);
-    });
-  }, [socket]);
+  // useEffect(() => {
+  //   console.log('socket changed')
+  //   socket.on("receive_message", (data) => {
+  //     // console.log("convo:",convo)
+  //     setConvo(prevList =>{return [...prevList, data.message]});
+  //     // setConvo([...convo, data.message]);
+  //     console.log(data.message);
+  //   });
+  // }, [socket]);
 
-  useEffect(()=>{
-    console.log('initial render finished')
-  },[])
+  // useEffect(()=>{
+  //   console.log('initial render finished')
+  // },[])
 
-  useEffect(()=>{
-    console.log(convo)
-  },[convo])
+  // useEffect(()=>{
+  //   console.log(convo)
+  // },[convo])
+
+  return <div></div>
 
   return (
     <div className="App">
