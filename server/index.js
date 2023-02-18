@@ -39,7 +39,7 @@ io.on("connection", (socket) => {
     } else {
       socket.emit("error_message", "Room Does not Exist");
     }
-    console.log("Joined game, host:", socket.host);
+    console.log("Joined game, host:", rooms[data.room]);
   });
 
   socket.on("send_message", (data) => {
@@ -51,8 +51,9 @@ io.on("connection", (socket) => {
       if (socket.id in rooms[room]) {
         delete rooms[room][socket.id];
         io.to(room).emit("players", Object.values(rooms[room]));
-
-        if (Object.keys(rooms[room].length === 0)) {
+        console.log("Player left game:", Object.keys(rooms[room]), Object.keys(rooms[room]).length );
+        if (Object.keys(rooms[room]).length === 0) {
+          console.log('deleting room')
           delete rooms[room];
         }
         break;
