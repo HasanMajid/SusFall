@@ -10,6 +10,7 @@ function Game() {
   const socket = useContext(SocketContext);
   const [players, setPlayers] = useState([]);
   const [name, setName] = useState("");
+  const [roomExist, setRoomExist] = useState(true);
   const { room } = useParams();
 
   const joinRoom = () => {
@@ -34,6 +35,7 @@ function Game() {
 
     socket.on("error_message", (data) => {
       console.log(data, room);
+      setRoomExist(false)
       // setPlayers((list) => [...list, data]);
     });
   }, [socket]);
@@ -43,6 +45,10 @@ function Game() {
       joinRoom();
     }
   }, [name]);
+
+  if (!roomExist){
+    return <Heading>Room Does not Exist</Heading>
+  }
 
   return (
     <Center>
