@@ -19,11 +19,11 @@ const rooms = {};
 
 io.on("connection", (socket) => {
   socket.on("create_room", async (room) => {
-    if (socket.host) {
-      console.log("deleting roomID:", socket.roomID);
-      io.socketsLeave(socket.roomID);
-      delete rooms[socket.roomID];
-    }
+    // if (socket.host) {
+    //   console.log("deleting roomID:", socket.roomID);
+    //   io.socketsLeave(socket.roomID);
+    //   delete rooms[socket.roomID];
+    // }
     socket.host = true;
     socket.roomID = room;
     console.log("created game, host:", socket.host);
@@ -55,6 +55,7 @@ io.on("connection", (socket) => {
         if (Object.keys(rooms[room]).length === 0 || socket.host === true ) {
           console.log('deleting room')
           delete rooms[room];
+          io.to(room).emit("error_message", "Room Does not Exist");
         }
         break;
       }
