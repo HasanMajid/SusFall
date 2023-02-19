@@ -1,69 +1,38 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { Center, Flex, Heading, Text } from "@chakra-ui/react";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
 
-import { SocketContext } from "../contexts/SocketContext";
+import { GameContext } from "../contexts/GameContext";
 
 import NameInput from "../components/game/NameInput";
+import { useParams } from "react-router-dom";
 
 function Game() {
-  const socket = useContext(SocketContext);
-  const [players, setPlayers] = useState([]);
-  const [name, setName] = useState("");
-  const [roomExist, setRoomExist] = useState(true);
+  const { players, roomExist, setName, name, setRoom } =
+    useContext(GameContext);
+
   const { room } = useParams();
-
-  const joinRoom = () => {
-    socket.emit("join_room", {name, room});
-  };
-
   useEffect(() => {
-    socket.on("players", (data) => {
-      console.log("players updated", data, room);
-      setPlayers(data);
-    });
+    setRoom(room);
+  }, []);
 
-    socket.on("user_disconnected", (data) => {
-      console.log("player disconnected", data);
-      setPlayers((list) => {
-        const newList = list;
-        const index = newList.indexOf(2);
-        newList.pop(index);
-        return [...newList];
-      });
-    });
+  if (!roomExist) {
+    return <Heading>Room Does not Exist</Heading>;
+  }
 
-    socket.on("error_message", (data) => {
-      console.log(data, room);
-      setRoomExist(false)
-      // setPlayers((list) => [...list, data]);
-    });
-  }, [socket]);
-
-  useEffect(() => {
-    if (name !== "") {
-      joinRoom();
-    }
-  }, [name]);
-
-  if (!roomExist){
-    return <Heading>Room Does not Exist</Heading>
+  if (name === "") {
+    return <NameInput setName={setName} />;
   }
 
   return (
     <Center>
-      {name === "" ? (
-        <NameInput setName={setName} />
-      ) : (
-        <Flex flexDir="column">
-          <Heading>Game Screen</Heading>
-          <br />
-          <Text fontSize={30}>room {room}</Text>
-          {players.map((item, index) => {
-            return <Text key={index}>{item.name}</Text>;
-          })}
-        </Flex>
-      )}
+      <Flex flexDir="column">
+        <Heading>Game Screen</Heading>
+        <br />
+        <Text fontSize={30}>room {room}</Text>
+        {players.map((item, index) => {
+          return <Text key={index}>{item.name}</Text>;
+        })}
+      </Flex>
     </Center>
   );
 }
