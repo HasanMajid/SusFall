@@ -40,6 +40,7 @@ function NameInput({ setName }) {
             setCurrentName(e.target.value)
           }}
           color={"facebook.600"}
+          autoFocus={true}
         />
       </Flex>
       <Button
