@@ -12,7 +12,10 @@ console.log("running in", env);
 
 const io = new Server(server, {
   cors: {
-    origin:  env === 'development' ? "http://127.0.0.1:5173" : 'https://sus-fall.vercel.app',
+    origin:
+      env === "development"
+        ? "http://127.0.0.1:5173"
+        : "https://sus-fall.vercel.app",
     methods: ["GET", "POST"],
   },
 });
