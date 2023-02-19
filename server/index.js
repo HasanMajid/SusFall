@@ -7,10 +7,12 @@ const cors = require("cors");
 app.use(cors());
 
 const server = http.createServer(app);
+const env = process.env.NODE_ENV;
+console.log("running in", env);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://127.0.0.1:5173",
+    origin:  env === 'development' ? "http://127.0.0.1:5173" : 'https://sus-fall.vercel.app',
     methods: ["GET", "POST"],
   },
 });
@@ -42,7 +44,11 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", () => {
-    if (socket.roomID && rooms[socket.roomID] && socket.id in rooms[socket.roomID]) {
+    if (
+      socket.roomID &&
+      rooms[socket.roomID] &&
+      socket.id in rooms[socket.roomID]
+    ) {
       delete rooms[socket.roomID][socket.id];
       io.to(socket.roomID).emit("players", Object.values(rooms[socket.roomID]));
       if (
