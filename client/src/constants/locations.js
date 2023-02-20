@@ -7,7 +7,6 @@ import casino from "../assets/casino.jpg";
 import circus from "../assets/circus.jpg";
 import classroom from "../assets/classroom.jpg";
 import embassy from "../assets/embassy.jpg";
-import gasStation from "../assets/gas-station.jpg";
 import hospital from "../assets/hospital.jpg";
 import hotel from "../assets/hotel.jpg";
 import militaryArmy from "../assets/millitary army.jpg";
@@ -28,7 +27,6 @@ const locations = {
   circus,
   classroom,
   embassy,
-  gasStation,
   hospital,
   hotel,
   militaryArmy,
@@ -50,7 +48,6 @@ export const locationNames = [
   "circus",
   "classroom",
   "embassy",
-  "gasStation",
   "hospital",
   "hotel",
   "militaryArmy",
