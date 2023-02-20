@@ -11,6 +11,7 @@ const GameProvider = ({ children }) => {
   const [roomExist, setRoomExist] = useState(true);
   const [room, setRoom] = useState("");
   const [gameStarted, setGameStarted] = useState(false);
+  const [image, setImage] = useState(null);
 
   const joinRoom = () => {
     console.log(room);
@@ -38,7 +39,10 @@ const GameProvider = ({ children }) => {
       setRoomExist(false);
     });
 
-    socket.on("game_start", (data) => {});
+    socket.on("start_game", (data) => {
+      setImage(data.image)
+      setGameStarted(true);
+    });
   }, [socket]);
 
   useEffect(() => {
@@ -49,7 +53,7 @@ const GameProvider = ({ children }) => {
 
   return (
     <GameContext.Provider
-      value={{ players, roomExist, setName, name, setRoom }}
+      value={{ players, roomExist, setName, name, setRoom, gameStarted, image }}
     >
       {children}
     </GameContext.Provider>

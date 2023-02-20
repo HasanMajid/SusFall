@@ -52,6 +52,11 @@ io.on("connection", (socket) => {
     socket.to(data.room).emit("players", Object.values(rooms[data.room]));
   });
 
+  socket.on("start_game", (data) => {
+    console.log('started game')
+    io.to(socket.roomID).emit('start_game', data)
+  });
+
   socket.on("send_message", (data) => {
     console.log(data);
   });
