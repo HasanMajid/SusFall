@@ -12,8 +12,16 @@ import Grid from "../components/grid/Grid";
 import locations from "../constants/locations";
 
 function Game() {
-  const { players, roomExist, setName, name, setRoom, gameStarted, image } =
-    useContext(GameContext);
+  const {
+    players,
+    roomExist,
+    setName,
+    name,
+    setRoom,
+    gameStarted,
+    image,
+    spy,
+  } = useContext(GameContext);
   const socket = useContext(SocketContext);
   const [lobby, setLobby] = useState(<div></div>);
 
@@ -28,7 +36,7 @@ function Game() {
     setLobby(
       <Flex flexDir={"column"} m={"auto"}>
         {" "}
-        {players.map((item, index) => {
+        {players.map((item) => {
           return (
             <Flex key={item.id} m={3} fontSize={20} justifyContent={"flex-end"}>
               <Box mr={3}>{item.name}</Box>
@@ -51,19 +59,27 @@ function Game() {
   }
 
   if (gameStarted) {
-    console.log('showing game screen')
+    console.log("showing game screen");
     console.log("image is", image);
-    return <Center flexDir={"column"} m={5}>
-      <Image
-        src={locations[image]}
-        w={500}
-        shadow={"dark-lg"}
-        borderWidth={2}
-        borderRadius={10}
-      />
-      <Heading m={2}>{image}</Heading>
-      <Grid />
-    </Center>;
+    return (
+      <Center flexDir={'column'}>
+        {spy ? (
+          <Heading m={5} color={'red.300'}>You are the spy</Heading>
+        ) : (
+          <Flex flexDir={"column"} m={5}>
+            <Image
+              src={locations[image]}
+              w={500}
+              shadow={"dark-lg"}
+              borderWidth={2}
+              borderRadius={10}
+            />
+            <Heading m={2}>{image}</Heading>
+          </Flex>
+        )}
+        <Grid />
+      </Center>
+    );
   }
 
   return (

@@ -12,6 +12,7 @@ const GameProvider = ({ children }) => {
   const [room, setRoom] = useState("");
   const [gameStarted, setGameStarted] = useState(false);
   const [image, setImage] = useState(null);
+  const [spy, setSpy] = useState("");
 
   const joinRoom = () => {
     console.log(room);
@@ -40,7 +41,12 @@ const GameProvider = ({ children }) => {
     });
 
     socket.on("start_game", (data) => {
-      setImage(data.image)
+      if (data.spy === true) {
+        setSpy(true);
+      } else {
+        setImage(data.image);
+      }
+      console.log('starting game!!')
       setGameStarted(true);
     });
   }, [socket]);
@@ -53,7 +59,16 @@ const GameProvider = ({ children }) => {
 
   return (
     <GameContext.Provider
-      value={{ players, roomExist, setName, name, setRoom, gameStarted, image }}
+      value={{
+        players,
+        roomExist,
+        setName,
+        name,
+        setRoom,
+        gameStarted,
+        image,
+        spy,
+      }}
     >
       {children}
     </GameContext.Provider>
