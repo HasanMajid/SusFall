@@ -34,12 +34,22 @@ io.on("connection", (socket) => {
     console.log(socket.id);
     if (rooms[data.room]) {
       socket.roomID = data.room;
-      rooms[data.room][socket.id] = { name: data.name, score: 0 };
+      rooms[data.room][socket.id] = {
+        name: data.name,
+        score: 0,
+        ready: false,
+        id: socket.id,
+      };
       await socket.join(data.room);
       io.to(data.room).emit("players", Object.values(rooms[data.room]));
     } else {
       socket.emit("error_message", "Room Does not Exist");
     }
+  });
+
+  socket.on("set_ready", async (data) => {
+    rooms[data.room][socket.id].ready = data.ready;
+    socket.to(data.room).emit("players", Object.values(rooms[data.room]));
   });
 
   socket.on("send_message", (data) => {

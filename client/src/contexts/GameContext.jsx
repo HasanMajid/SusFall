@@ -10,6 +10,7 @@ const GameProvider = ({ children }) => {
   const [name, setName] = useState("");
   const [roomExist, setRoomExist] = useState(true);
   const [room, setRoom] = useState("");
+  const [gameStarted, setGameStarted] = useState(false);
 
   const joinRoom = () => {
     console.log(room);
@@ -36,6 +37,8 @@ const GameProvider = ({ children }) => {
       console.log(data, room);
       setRoomExist(false);
     });
+
+    socket.on("game_start", (data) => {});
   }, [socket]);
 
   useEffect(() => {
