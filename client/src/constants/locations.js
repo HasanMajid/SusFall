@@ -1,21 +1,21 @@
-import airplane from "../assets/airplane.jpg";
-import museum from "../assets/art museum.jpg";
-import bank from "../assets/bank.jpg";
-import beach from "../assets/beach.jpg";
-import theatre from "../assets/broadway theatre.jpg";
-import casino from "../assets/casino.jpg";
-import circus from "../assets/circus.jpg";
-import classroom from "../assets/classroom.jpg";
-import embassy from "../assets/embassy.jpg";
-import hospital from "../assets/hospital.jpg";
-import hotel from "../assets/hotel.jpg";
-import militaryArmy from "../assets/millitary army.jpg";
-import movieStudio from "../assets/movie studio.jpg";
-import passengerTrain from "../assets/passenger train.jpg";
-import policeDep from "../assets/police department.jpg";
-import restaurant from "../assets/restaurant.jpg";
-import serviceStation from "../assets/service station.jpg";
-import spaceStation from "../assets/space station.jpg";
+import airplane from "../assets/airplane.webp";
+import museum from "../assets/art museum.webp";
+import bank from "../assets/bank.webp";
+import beach from "../assets/beach.webp";
+import theatre from "../assets/broadway theatre.webp";
+import casino from "../assets/casino.webp";
+import circus from "../assets/circus.webp";
+import classroom from "../assets/classroom.webp";
+import embassy from "../assets/embassy.webp";
+import hospital from "../assets/hospital.webp";
+import hotel from "../assets/hotel.webp";
+import militaryArmy from "../assets/millitary army.webp";
+import movieStudio from "../assets/movie studio.webp";
+import passengerTrain from "../assets/passenger train.webp";
+import policeDep from "../assets/police department.webp";
+import restaurant from "../assets/restaurant.webp";
+import serviceStation from "../assets/service station.webp";
+import spaceStation from "../assets/space station.webp";
 
 const locations = {
   airplane,
