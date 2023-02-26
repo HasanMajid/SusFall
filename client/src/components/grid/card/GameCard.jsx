@@ -8,7 +8,6 @@ import {
   Image,
   Center,
 } from "@chakra-ui/react";
-import beach from "../../../assets/classroom.jpg";
 
 function GameCard({ img, name }) {
   return (
