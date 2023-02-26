@@ -6,10 +6,7 @@ import { SocketContext } from "../../../contexts/SocketContext";
 import Message from "./Message";
 
 function Chat() {
-  const [messages, setMessages] = useState([
-    { message: "this is a message", name: "bob" },
-    { message: "this is a message", name: "bob" },
-  ]);
+  const [messages, setMessages] = useState([]);
   const socket = useContext(SocketContext);
 
   useEffect(() => {
@@ -30,17 +27,26 @@ function Chat() {
       borderStyle={"groove"}
       position={"relative"}
       flexDir={"column"}
+      //   overflowY="scroll"
     >
-      {messages.map((item, index) => {
-        return (
-          <Message
-            message={item.message}
-            name={item.name}
-            mine={item?.mine}
-            key={index}
-          />
-        );
-      })}
+      <Flex
+        borderStyle={"groove"}
+        // position={"relative"}
+        flexDir={"column"}
+        overflowY="scroll"
+        mb={20}
+      >
+        {messages.map((item, index) => {
+          return (
+            <Message
+              message={item.message}
+              name={item.name}
+              mine={item?.mine}
+              key={index}
+            />
+          );
+        })}
+      </Flex>
 
       <ChatInput setMessages={setMessages} />
     </Flex>
