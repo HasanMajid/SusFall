@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import { Flex } from "@chakra-ui/react";
 import ChatInput from "./ChatInput";
 import { SocketContext } from "../../../contexts/SocketContext";
@@ -8,6 +8,11 @@ import Message from "./Message";
 function Chat() {
   const [messages, setMessages] = useState([]);
   const socket = useContext(SocketContext);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    containerRef.current.scrollTop = containerRef.current.scrollHeight;
+  }, [messages]);
 
   useEffect(() => {
     socket.on("receive_message", (data) => {
@@ -35,6 +40,8 @@ function Chat() {
         flexDir={"column"}
         overflowY="scroll"
         mb={20}
+        h={"100%"}
+        ref={containerRef}
       >
         {messages.map((item, index) => {
           return (
