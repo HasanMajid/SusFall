@@ -21,9 +21,11 @@ function Message({ name, message, mine }) {
           h={"fit-content"}
           m={1}
           borderRadius={20}
-          borderTopLeftRadius={0}
+          borderTopLeftRadius={mine ? 20 : 0}
+          borderTopRightRadius={mine ? 0 : 20}
+          backgroundColor={mine ? "orange.500" : "blue.600"}
         >
-          <Text color={"white"}>{message}</Text>
+          <Text color={"white"} fontSize={18} fontWeight={'semibold'}>{message}</Text>
         </Box>
       </Flex>
     </Flex>
