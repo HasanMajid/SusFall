@@ -28,6 +28,7 @@ function ChatInput({ setMessages }) {
         borderRadius={20}
         borderColor={"blue.400"}
         onChange={(e) => {
+          e.preventDefault();
           setCurrentMessage(e.target.value);
         }}
         value={currentMessage}
