@@ -10,6 +10,7 @@ import StartButton from "../components/game/StartButton";
 import { SocketContext } from "../contexts/SocketContext";
 import Grid from "../components/grid/Grid";
 import locations from "../constants/locations";
+import Chat from "../components/game/chat/Chat";
 
 function Game() {
   const {
@@ -62,9 +63,11 @@ function Game() {
     console.log("showing game screen");
     console.log("image is", image);
     return (
-      <Center flexDir={'column'}>
+      <Center flexDir={"column"}>
         {spy ? (
-          <Heading m={5} color={'red.300'}>You are the spy</Heading>
+          <Heading m={5} color={"red.300"}>
+            You are the spy
+          </Heading>
         ) : (
           <Flex flexDir={"column"} m={5}>
             <Image
@@ -77,7 +80,10 @@ function Game() {
             <Heading m={2}>{image}</Heading>
           </Flex>
         )}
-        <Grid />
+        <Flex flexDir={"row"}>
+          <Grid />
+          <Chat />
+        </Flex>
       </Center>
     );
   }
