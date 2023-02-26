@@ -32,6 +32,11 @@ function ChatInput({ setMessages }) {
           setCurrentMessage(e.target.value);
         }}
         value={currentMessage}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            sendMessage();
+          }
+        }}
       />
       <Button
         borderRadius={"0%"}
