@@ -11,6 +11,7 @@ import { SocketContext } from "../contexts/SocketContext";
 import Grid from "../components/grid/Grid";
 import locations from "../constants/locations";
 import Chat from "../components/game/chat/Chat";
+import PlayerListRow from "../components/game/PlayerListRow";
 
 function Game() {
   const {
@@ -51,9 +52,9 @@ function Game() {
     );
   }, [players]);
 
-  if (!roomExist) {
-    return <Heading>Room Does not Exist</Heading>;
-  }
+  // if (!roomExist) {
+  //   return <Heading>Room Does not Exist</Heading>;
+  // }
 
   if (name === "") {
     return <NameInput setName={setName} />;
@@ -64,6 +65,7 @@ function Game() {
     console.log("image is", image);
     return (
       <Center flexDir={"column"}>
+        <PlayerListRow players={players} />
         {spy ? (
           <Heading m={5} color={"red.300"}>
             You are the spy
