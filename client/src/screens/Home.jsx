@@ -19,8 +19,6 @@ function Home() {
     navigate("/game/" + roomID);
   };
 
-
-
   const navigate = useNavigate();
   return (
     <Flex align={"center"} flexDir={"column"}>
