@@ -54,19 +54,19 @@ io.on("connection", (socket) => {
 
   socket.on("start_game", (data) => {
     console.log("started game", data);
-    console.log(rooms)
+    console.log(rooms);
     for (const player in rooms[socket.roomID]) {
-      console.log(player === data.spy)
+      console.log(player === data.spy);
       if (data.spy === player) {
         io.to(player).emit("start_game", { spy: true });
       } else {
-        io.to(player).emit("start_game", {image: data.image});
+        io.to(player).emit("start_game", { image: data.image });
       }
     }
   });
 
   socket.on("send_message", (data) => {
-    socket.to(socket.roomID).emit('receive_message', data)
+    socket.to(socket.roomID).emit("receive_message", data);
     console.log(data);
   });
 
