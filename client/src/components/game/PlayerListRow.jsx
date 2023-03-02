@@ -17,10 +17,10 @@ const PlayerCircle = ({ name }) => {
   console.log(name);
   return (
     <Box
-      p={5}
+      p={3}
       backgroundColor={"gray.200"}
       color={"black"}
-      borderRadius={30}
+      borderRadius={28}
       fontSize={21}
       fontWeight={"semibold"}
       m={1}
