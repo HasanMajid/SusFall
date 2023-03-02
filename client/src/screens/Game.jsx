@@ -12,6 +12,7 @@ import Grid from "../components/grid/Grid";
 import locations from "../constants/locations";
 import Chat from "../components/game/chat/Chat";
 import PlayerListRow from "../components/game/PlayerListRow";
+import Timer from "../components/game/Timer";
 
 function Game() {
   const {
@@ -66,10 +67,13 @@ function Game() {
     return (
       <Center flexDir={"column"}>
         <PlayerListRow players={players} />
+        <Timer />
         {spy ? (
-          <Heading m={5} color={"red.300"}>
-            You are the spy
-          </Heading>
+          <Flex flexDir={"column"}>
+            <Heading m={5} color={"red.300"}>
+              You are the spy
+            </Heading>
+          </Flex>
         ) : (
           <Flex flexDir={"column"} m={5}>
             <Image
